@@ -1,7 +1,5 @@
 #pragma once
 using namespace std;
-// Модуль DList.h
-// шаблон класса узла списка
 template<typename T>
 class Node {
 public:
@@ -13,33 +11,29 @@ public:
 		next = NULL;
 	};
 };
-// шаблон класса двусвязного списка
 template <typename T>
 class ListNode {
 private:
-	Node<T>* head; //голова списка
-	Node<T>* tail; //хвост списка
-	Node<T>* curr; // указатель на текущий узел
+	Node<T>* head; 
+	Node<T>* tail; 
+	Node<T>* curr; 
 	int count = 0;
-	Node<T>* FindNodePos(int pos) // поиск узла по позиции
+	Node<T>* FindNodePos(int pos)
 	{
 		if (pos > count || pos < 1) return 0;
 		Node<T>* temp = head;
 		for (temp; pos > 1; temp = temp->next, pos--);
 		return temp;
 	}
-	Node<T>* FindNode(T d) // поиск узла по информационному значению
+	Node<T>* FindNode(T d)
 	{
 		for (Node<T>* temp = head; temp; temp = temp->data)
 			if (temp->data == d) return temp;
 		return 0;
 	}
 public:
-	// конструктор по умолчанию
 	ListNode() :head(NULL), tail(NULL), curr(NULL) {};
-	// конструктор с параметром информационного значения узла
 	ListNode(T d) { AddHead(d); };
-	// конструктор с параметрами для заполнение узлов значениями из массива
 	ListNode(T arr[], int length)
 	{
 		for (int i = 0; i < length; i++)
@@ -56,15 +50,13 @@ public:
 			current = current->next;
 		}
 	}
-	// деструктор
+	// Г¤ГҐГ±ГІГ°ГіГЄГІГ®Г°
 	~ListNode() { Clear(); }
 
 	Node<T>* GetHead()
 	{
 		return head;
 	}
-	// методы добавления и вставки узлов, вывода прямого и обратного, удаления,
-	// очистки списка и дополнительные
 	void AddHead(T d)
 	{
 		Node<T>* temp = new Node<T>;
@@ -177,7 +169,6 @@ public:
 	{
 		return head == 0;
 	}
-	// методы работы с итераторами
 	T CurrentNode() { return curr->data; }
 	T Next() 
 	{
@@ -192,7 +183,7 @@ public:
 		if (it)
 			return it->data;
 		else
-			throw "Элемента на данной позиции не существует";
+			throw "ГќГ«ГҐГ¬ГҐГ­ГІГ  Г­Г  Г¤Г Г­Г­Г®Г© ГЇГ®Г§ГЁГ¶ГЁГЁ Г­ГҐ Г±ГіГ№ГҐГ±ГІГўГіГҐГІ";
 	};
 	T& operator++(int)
 	{
